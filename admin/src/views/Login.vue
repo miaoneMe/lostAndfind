@@ -26,12 +26,12 @@ export default {
   methods: {
    async login(){
           const res = await this.$http.post('login',this.model)
-          console.log(res.data)
+           // console.log(res.data)
           //  console.log(this.model)
           //localStorage浏览器的一个存储浏览器关闭后下次打开还能访问的到
            localStorage.token = res.data.token
            //而sessionStorage  关闭浏览器就没有了
-          this.$touter.push('/')
+          this.$router.push('/')
           this.$message({
               type:'success',
               message:'登录成功'
