@@ -165,11 +165,8 @@ router.delete('/:id',async(req,res) => {
       
          //3.返回token
            const jwt = require('jsonwebtoken')
-           jwt.sign({
-               id: user._id,
-               _id: user._id,
-               username: user.username,
-            })
+           const token = jwt.sign({id: user._id},app.get('secret'))
+           res.send({token})
           
     })
 }
