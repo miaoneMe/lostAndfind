@@ -26,3 +26,6 @@ apidoc -i routes/web -o apidoc/web
 
 ### npm i jsonwebtoken
 + jsonwebtoken   web token验证
+
+### npm i http-assert 断言
+ 可以处理大量判断if else
