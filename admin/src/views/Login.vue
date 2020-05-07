@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <el-card header="请先登录" class="login-card">
+    <el-card header="失物招领后台管理" class="login-card">
          <el-form @submit.native.prevent="login">
             <el-form-item label="用户名">
                  <el-input v-model="model.username"></el-input>
@@ -26,7 +26,8 @@ export default {
   methods: {
    async login(){
           const res = await this.$http.post('login',this.model)
-           // console.log(res.data)
+
+          //  console.log(res.data)
           //  console.log(this.model)
           //localStorage浏览器的一个存储浏览器关闭后下次打开还能访问的到
            localStorage.token = res.data.token

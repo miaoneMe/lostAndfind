@@ -7,7 +7,7 @@ const schema = new mongoose.Schema({
     time:{ type:String},
     desc:{ type:String},
     tel:{ type:String},
-    img:{ type:String}
+    img:{ type:String},
 })
 
 

@@ -36,7 +36,7 @@ const AdminUserList =() =>
 Vue.use(VueRouter);
 
 const routes = [
-  {path:'/login',name:'login',component:Login},
+  {path:'/login',name:'login',component:Login,meta:{ isPublic:true}},
   {
     path: '/',
     name: 'Main',
@@ -71,5 +71,15 @@ const routes = [
 const router = new VueRouter({
   routes,
 });
+
+router.beforeEach((to,from,next) => {
+    // console.log(to.meta)
+    //无论进入哪一歌路由都要看有没有localStorage 和 isPublic
+    if(!to.meta.isPublic && !localStorage.token){
+        return next('/login')
+        // console.log('need login')
+    }
+    next()
+})
 
 export default router;
