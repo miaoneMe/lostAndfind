@@ -6,6 +6,7 @@ module.exports = app => {
     const SendLost = require('../../models/Lost')
     const SendFind = require('../../models/Find')
     const User = require('../../models/User')
+    const News = require('../../models/News')
 
 /**
  * @api {get} /sendlost 失物列表
@@ -87,10 +88,25 @@ router.post('/sendfind',async(req,res) => {
     const model = await SendFind.create(req.body)
     res.send(model)
    })
+/**
+ * @api {post} /news 发布留言
+ * @apiName GetUser
+ * @apiGroup News
+ *
+ *  @apiParam {String} news 留言
+ * 
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ */
+router.post('/news',async(req,res) => {
+    const model = await News.create(req.body)
+    res.send(model)
+})
 
-
-
-
+router.get('/news',async(req,res) => {
+    const items = await News.find().limit(10)
+    res.send(items)
+   })
 
    
    
@@ -192,5 +208,12 @@ router.post('/logout', (req,res,next)=>{
 })
 
     app.use('/web/api',router)
-    //发送邮箱验证码
+    
+    const multer = require('multer')
+    const upload = multer({dest:__dirname + '/../../uploads'})
+    app.post('/web/api/upload',upload.single('file'),async(req,res,next) => {
+        const file = req.file
+        file.url = `http://localhost:3000/uploads/${file.filename}`
+        res.send(file)
+    })
 }
